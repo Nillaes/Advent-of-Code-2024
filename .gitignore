@@ -3,6 +3,7 @@ input/
 
 # VS Code specific
 .vscode/
+.vscode
 
 # Prerequisites
 *.d
