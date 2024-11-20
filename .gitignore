@@ -1,6 +1,8 @@
 # AoC specific
 input/
 
+# VS Code specific
+.vscode/
 
 # Prerequisites
 *.d

@@ -4,8 +4,8 @@
 
 std::ifstream GetInputStream(std::string day){
     std::ifstream inputStream;
-    std::string filepath = "../input/day--2015.txt";
-    filepath.insert(13,day);
+    std::string filepath = "../../input/day--2015.txt";
+    filepath.insert(16,day);
     printf(filepath.c_str());
     inputStream.open(filepath);
     if(inputStream.is_open()){
