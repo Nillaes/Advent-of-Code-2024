@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.jinja": "html",
+        "istream": "cpp"
+    }
+}
