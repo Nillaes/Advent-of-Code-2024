@@ -1,11 +1,17 @@
 #include "../../utils/input.h"
-std::string day = "2";
+typedef std::string str;
+
+str day = "2";
+
+
 
 struct Box
 {
     int Height;
     int Width;
     int Length;
+    int Area;
+    int smallestSide;
 };
 
 int main(int argc, const char** argv) {
@@ -22,31 +28,68 @@ int main(int argc, const char** argv) {
     inputStream.read(buffer, filesize);
     inputStream.close();
 
-    char** lineBuffer = new char* [1024];
-    int8_t bufferIndex = 0;
+    str lineBuffer[1024];
+    int currLine = 0;
 
-    char* line[64];
-    int8_t lineIndex = 0;
-    
+    str line = "";
     for (int i = 0; i < filesize; i++)
     {
-        if (buffer[i] != '\n'){
-            line[lineIndex] = &buffer[i];
-            lineIndex++;
+        if (buffer[i] != '\n')
+        {
+            line.append(1, buffer[i]);
         }else{
-            lineBuffer[bufferIndex] = *line;
-            lineIndex = 0;
-            char* line[64];
-            bufferIndex++;
+            lineBuffer[currLine] = line;
+            currLine++;
+            line.clear();
         }
     }
-    //free(&bufferIndex);
-    //free(&lineBuffer);
-    //free(&line);
+    /*
+    At this point Line buffer contains all the lines as individual strings
+    The part probably should be added as a separate Utility function in the utils.h header so it can be reused in the other challenges
+    */
+   Box boxList[1024];
+   for (int i = 0; i < 1024; i++){
+    if(lineBuffer[i] != ""){ // Ignore empty strings
+        str stringNumber = "";
+        int8_t side = 0;
+        for (int8_t j = 0; j <= lineBuffer[i].length(); j++){
+            if (lineBuffer[i][j] != 'x' && j < lineBuffer[i].length())
+            {
+                stringNumber.append(1,lineBuffer[i][j]);
+            }else{
+                if (side == 0)
+                {
+                    boxList[i].Length = NumbersToInt(stringNumber);
+                    stringNumber.clear();
+                    side++;
+                }else if (side == 1)
+                {
+                    boxList[i].Width = NumbersToInt(stringNumber);
+                    stringNumber.clear();
+                    side++;
+                }else if (side == 2)
+                {
+                    boxList[i].Height = NumbersToInt(stringNumber);
+                    stringNumber.clear();
+                    side++;
+                }
+            }
+        }
+        }
+   }
+   // Boxlist is now loaded
+    int totalNeeded = 0;
+    for (int i = 0; i < 1024; i++)
+    {
+        int s1 = boxList[i].Width * boxList[i].Length;
+        int s2 = boxList[i].Width * boxList[i].Height;
+        int s3 = boxList[i].Height * boxList[i].Length;
+        boxList[i].Area = 2*s1 + 2*s2 + 2*s3;
+        boxList[i].smallestSide = std::min(s1, std::min(s2, s3));
+        totalNeeded += boxList[i].Area + boxList[i].smallestSide;
+    }
 
-    std::cout << "\n" << *lineBuffer << "\n";
-
-    //std::cout << "\n" << NumbersToInt("67396") << "\n";
+    std::cout << '\n' << totalNeeded << '\n';
 
     return 0;
 }
