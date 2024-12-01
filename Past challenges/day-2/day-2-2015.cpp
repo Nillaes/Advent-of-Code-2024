@@ -1,4 +1,5 @@
 #include "../../utils/input.h"
+#include "../../utils/utils.h"
 typedef std::string str;
 
 str day = "2";

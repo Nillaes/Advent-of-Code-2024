@@ -6,7 +6,8 @@
 
 std::ifstream GetInputStream(std::string day){
     std::ifstream inputStream;
-    std::string filepath = "../../input/day--2015.txt";
+    std::string filepath = "../../input/day-.txt";
+    //std::string filepath = "../../input/day--2015.txt"; //Use for challenges from 2015 
     filepath.insert(16,day);
     printf(filepath.c_str());
     inputStream.open(filepath);
@@ -22,14 +23,3 @@ std::ifstream GetInputStream(std::string day){
     return inputStream;
 }
 
-// this get's called with something like "679407" and returns 679407
-int NumbersToInt(std::string num){
-    int length = num.length();
-    int number = 0;
-    for (int i = 0; i < length; i++){
-        int digit = num[i] - int('0');
-        number += digit * pow(10, length - i - 1);
-    }
-
-    return number;
-}
