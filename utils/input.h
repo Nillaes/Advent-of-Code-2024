@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include <vector>
 
 std::ifstream GetInputStream(std::string day){
     std::ifstream inputStream;
@@ -23,3 +24,21 @@ std::ifstream GetInputStream(std::string day){
     return inputStream;
 }
 
+/* Splits a string using a separator. Currently only accepts single character separators.
+Returns a std::vector containing the split string*/
+std::vector<std::string> Split(std::string string, char separator){
+
+    std::string buff = "";
+    std::vector<std::string> parts;
+    for (int i = 0; i < string.length(); i++){
+        if (string[i] != separator){
+            buff.append(1, string[i]);
+        }else{
+            parts.push_back(buff);
+            buff.clear();
+        }
+    }
+    parts.push_back(buff);
+    
+    return parts;
+}

@@ -33,6 +33,9 @@ int main(int argc, const char** argv) {
             line.clear();
         }
     }
+    //cleanup
+    delete [] buffer;
+
 
     int list1[1024];
     int list2[1024];

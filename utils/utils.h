@@ -18,7 +18,6 @@ int NumbersToInt(std::string num){
 }
 
 // Blatantly stolen sorting implementation
-
 void count_sort(int arr[], int pos)
 {
     const int n = 1024;
@@ -50,7 +49,6 @@ void count_sort(int arr[], int pos)
         arr[i] = ans[i];
     }
 }
-
 // function to implement radix sort (requires array to be 1024 long)
 void radix_sort(int arr[])
 {
